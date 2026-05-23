@@ -1,0 +1,68 @@
+name: Release
+
+# Triggered by the cross-repo push from TapTap-Pay/api's release-sdks
+# workflow: api tags itself e.g. "0.0.33" → release-sdks pushes the
+# same tag onto this repo → this workflow runs.
+#
+# Composer/Packagist don't need a separate artifact upload — Packagist
+# polls GitHub tags directly. So all we do here is verify the tag
+# builds + lints cleanly, then cut a GitHub Release for the changelog.
+# (Make sure the package is registered at https://packagist.org/ once;
+# its webhook will pick up subsequent tags automatically.)
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  verify:
+    name: Verify release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          extensions: curl, json, mbstring
+          coverage: none
+
+      - name: Validate composer.json
+        run: composer validate --strict --no-check-publish
+
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Lint PHP sources
+        run: |
+          find src tests examples gen -type f -name '*.php' -print0 \
+            | xargs -0 -n1 -P4 php -l > /dev/null
+
+      - name: Tests
+        run: |
+          if [ -d tests ] && find tests -type f -name '*Test.php' | grep -q .; then
+            vendor/bin/phpunit
+          else
+            echo "no tests yet"
+          fi
+
+  release:
+    name: Cut GitHub Release
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" \
+            --title "${GITHUB_REF_NAME}" \
+            --generate-notes
