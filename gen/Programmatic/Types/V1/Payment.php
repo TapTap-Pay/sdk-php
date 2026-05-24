@@ -69,6 +69,14 @@ class Payment extends \Google\Protobuf\Internal\Message
      * Generated from protobuf field <code>string cancel_url = 11 [json_name = "cancelUrl"];</code>
      */
     protected $cancel_url = '';
+    /**
+     * Hosted-checkout URL the integrator should redirect the customer to.
+     * Built server-side from the platform's SANDBOX_URL / PROD_URL config
+     * (based on MODE) so SDK clients never hardcode the host or path.
+     *
+     * Generated from protobuf field <code>string checkout_url = 12 [json_name = "checkoutUrl"];</code>
+     */
+    protected $checkout_url = '';
 
     /**
      * Constructor.
@@ -92,6 +100,10 @@ class Payment extends \Google\Protobuf\Internal\Message
      *           integrator can mirror them in their own UI or in a hosted receipt
      *           page.
      *     @type string $cancel_url
+     *     @type string $checkout_url
+     *           Hosted-checkout URL the integrator should redirect the customer to.
+     *           Built server-side from the platform's SANDBOX_URL / PROD_URL config
+     *           (based on MODE) so SDK clients never hardcode the host or path.
      * }
      */
     public function __construct($data = NULL) {
@@ -389,6 +401,36 @@ class Payment extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, true);
         $this->cancel_url = $var;
+
+        return $this;
+    }
+
+    /**
+     * Hosted-checkout URL the integrator should redirect the customer to.
+     * Built server-side from the platform's SANDBOX_URL / PROD_URL config
+     * (based on MODE) so SDK clients never hardcode the host or path.
+     *
+     * Generated from protobuf field <code>string checkout_url = 12 [json_name = "checkoutUrl"];</code>
+     * @return string
+     */
+    public function getCheckoutUrl()
+    {
+        return $this->checkout_url;
+    }
+
+    /**
+     * Hosted-checkout URL the integrator should redirect the customer to.
+     * Built server-side from the platform's SANDBOX_URL / PROD_URL config
+     * (based on MODE) so SDK clients never hardcode the host or path.
+     *
+     * Generated from protobuf field <code>string checkout_url = 12 [json_name = "checkoutUrl"];</code>
+     * @param string $var
+     * @return $this
+     */
+    public function setCheckoutUrl(string $var)
+    {
+        GPBUtil::checkString($var, true);
+        $this->checkout_url = $var;
 
         return $this;
     }
