@@ -17,8 +17,8 @@ final class Options
     // an environment via the `$mode` constructor param ('production' or
     // 'sandbox'); the base URL resolves automatically.
 
-    public const PROD_BASE_URL = 'https://api.usetaptap.com';
-    public const SANDBOX_BASE_URL = 'https://api.usetaptap.dev';
+    public const PROD_BASE_URL = 'https://api.usetaptap.com/';
+    public const SANDBOX_BASE_URL = 'https://api.usetaptap.dev/';
 
     public readonly string $apiKey;
     public readonly string $baseUrl;
