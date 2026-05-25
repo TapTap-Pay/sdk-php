@@ -3,7 +3,7 @@
     "description": "Official PHP SDK for the TapTap-Pay API",
     "type": "library",
     "license": "Apache-2.0",
-    "homepage": "https://taptap.rs",
+    "homepage": "https://usetaptap.com",
     "keywords": ["taptap", "taptap-pay", "payments", "sdk", "connectrpc"],
     "require": {
         "php": ">=8.1",

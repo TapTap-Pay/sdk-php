@@ -3,7 +3,7 @@
 [![CI](https://github.com/TapTap-Pay/sdk-php/actions/workflows/ci.yml/badge.svg)](https://github.com/TapTap-Pay/sdk-php/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/license-Apache_2.0-blue.svg)](LICENSE)
 
-The official PHP SDK for the [TapTap-Pay](https://taptap.rs) API.
+The official PHP SDK for the [TapTap-Pay](https://usetaptap.com) API.
 
 It wraps the generated protobuf message classes with a thin
 [Connect-protocol](https://connectrpc.com/docs/protocol/) transport,
@@ -47,7 +47,7 @@ echo "link id: ", $resp->getLink()->getId(), PHP_EOL;
 
 ## Authentication
 
-API keys are minted in the [dashboard](https://app.taptap.rs). Sandbox
+API keys are minted in the [dashboard](https://app.usetaptap.com). Sandbox
 keys are prefixed `sk_test_`, live keys `sk_live_`. The SDK sends them
 as `Authorization: Bearer <key>` on every request.
 
@@ -56,7 +56,7 @@ as `Authorization: Bearer <key>` on every request.
 ```php
 $client = new Client(new Options(
     apiKey: "sk_live_...",           // required
-    baseUrl: "https://api.taptap.rs", // optional override
+    baseUrl: "https://api.usetaptap.com", // optional override
     maxRetries: 3,                    // default 3
     retryBaseDelayMs: 500,            // default 500ms
     timeoutSeconds: 60,               // default 60s
