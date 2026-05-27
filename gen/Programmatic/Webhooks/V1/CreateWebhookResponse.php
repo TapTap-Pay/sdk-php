@@ -20,7 +20,7 @@ class CreateWebhookResponse extends \Google\Protobuf\Internal\Message
     protected $webhook = null;
     /**
      * HMAC-SHA256 signing secret. Returned **exactly once** — store it on
-     * your side and validate the `X-TapTap-Signature` header on every
+     * your side and validate the `X-Webhook-Signature-V2` header on every
      * delivery.
      *
      * Generated from protobuf field <code>string secret = 2 [json_name = "secret"];</code>
@@ -36,7 +36,7 @@ class CreateWebhookResponse extends \Google\Protobuf\Internal\Message
      *     @type \Programmatic\Types\V1\WebhookSubscription $webhook
      *     @type string $secret
      *           HMAC-SHA256 signing secret. Returned **exactly once** — store it on
-     *           your side and validate the `X-TapTap-Signature` header on every
+     *           your side and validate the `X-Webhook-Signature-V2` header on every
      *           delivery.
      * }
      */
@@ -78,7 +78,7 @@ class CreateWebhookResponse extends \Google\Protobuf\Internal\Message
 
     /**
      * HMAC-SHA256 signing secret. Returned **exactly once** — store it on
-     * your side and validate the `X-TapTap-Signature` header on every
+     * your side and validate the `X-Webhook-Signature-V2` header on every
      * delivery.
      *
      * Generated from protobuf field <code>string secret = 2 [json_name = "secret"];</code>
@@ -91,7 +91,7 @@ class CreateWebhookResponse extends \Google\Protobuf\Internal\Message
 
     /**
      * HMAC-SHA256 signing secret. Returned **exactly once** — store it on
-     * your side and validate the `X-TapTap-Signature` header on every
+     * your side and validate the `X-Webhook-Signature-V2` header on every
      * delivery.
      *
      * Generated from protobuf field <code>string secret = 2 [json_name = "secret"];</code>
