@@ -10,5 +10,5 @@ namespace TapTap\Pay;
  */
 final class Version
 {
-    public const VALUE = "0.0.2";
+    public const VALUE = "0.0.3";
 }
