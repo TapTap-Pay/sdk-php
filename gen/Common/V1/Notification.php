@@ -103,7 +103,8 @@ class Notification extends \Google\Protobuf\Internal\Message
      *     @type \Google\Protobuf\Timestamp $read_at
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Common\Notifications::initOnce();
         parent::__construct($data);
     }

@@ -43,7 +43,8 @@ class PaginatedResponseMeta extends \Google\Protobuf\Internal\Message
      *     @type int $total_count
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Common\Response::initOnce();
         parent::__construct($data);
     }

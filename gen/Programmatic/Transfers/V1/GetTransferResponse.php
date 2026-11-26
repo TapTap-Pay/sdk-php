@@ -28,7 +28,8 @@ class GetTransferResponse extends \Google\Protobuf\Internal\Message
      *     @type \Programmatic\Types\V1\Transaction $transfer
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Programmatic\Transfers\Transfers::initOnce();
         parent::__construct($data);
     }

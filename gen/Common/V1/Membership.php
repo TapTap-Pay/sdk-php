@@ -79,7 +79,8 @@ class Membership extends \Google\Protobuf\Internal\Message
      *     @type string $avatar_url
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Common\Vendors::initOnce();
         parent::__construct($data);
     }

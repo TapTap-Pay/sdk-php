@@ -48,7 +48,8 @@ class ListPayInsRequest extends \Google\Protobuf\Internal\Message
      *     @type \Google\Protobuf\Timestamp $created_to
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Programmatic\Payins\Payins::initOnce();
         parent::__construct($data);
     }

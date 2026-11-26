@@ -131,7 +131,8 @@ class PaymentLink extends \Google\Protobuf\Internal\Message
      *     @type string $cancel_url
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Programmatic\Types\Types::initOnce();
         parent::__construct($data);
     }

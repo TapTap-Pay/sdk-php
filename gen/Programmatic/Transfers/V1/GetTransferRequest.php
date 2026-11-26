@@ -28,7 +28,8 @@ class GetTransferRequest extends \Google\Protobuf\Internal\Message
      *     @type string $transfer_id
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Programmatic\Transfers\Transfers::initOnce();
         parent::__construct($data);
     }

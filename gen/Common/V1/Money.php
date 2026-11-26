@@ -41,7 +41,8 @@ class Money extends \Google\Protobuf\Internal\Message
      *           amount in minor units
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Common\Finance::initOnce();
         parent::__construct($data);
     }

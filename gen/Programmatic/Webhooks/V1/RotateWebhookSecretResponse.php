@@ -33,7 +33,8 @@ class RotateWebhookSecretResponse extends \Google\Protobuf\Internal\Message
      *     @type string $secret
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Programmatic\Webhooks\Webhooks::initOnce();
         parent::__construct($data);
     }

@@ -105,7 +105,8 @@ class User extends \Google\Protobuf\Internal\Message
      *     @type string $last_name
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Common\Users::initOnce();
         parent::__construct($data);
     }

@@ -28,7 +28,8 @@ class GetPayOutResponse extends \Google\Protobuf\Internal\Message
      *     @type \Programmatic\Types\V1\Transaction $payout
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Programmatic\Payouts\Payouts::initOnce();
         parent::__construct($data);
     }

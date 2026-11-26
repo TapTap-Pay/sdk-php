@@ -28,7 +28,8 @@ class UpdateWebhookResponse extends \Google\Protobuf\Internal\Message
      *     @type \Programmatic\Types\V1\WebhookSubscription $webhook
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Programmatic\Webhooks\Webhooks::initOnce();
         parent::__construct($data);
     }

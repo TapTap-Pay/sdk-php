@@ -28,7 +28,8 @@ class CancelInvoiceResponse extends \Google\Protobuf\Internal\Message
      *     @type \Programmatic\Types\V1\Invoice $invoice
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Programmatic\Invoices\Invoices::initOnce();
         parent::__construct($data);
     }

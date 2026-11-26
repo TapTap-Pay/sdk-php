@@ -28,7 +28,8 @@ class UpdatePaymentLinkResponse extends \Google\Protobuf\Internal\Message
      *     @type \Programmatic\Types\V1\PaymentLink $link
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Programmatic\PaymentLinks\PaymentLinks::initOnce();
         parent::__construct($data);
     }

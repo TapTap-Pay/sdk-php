@@ -48,7 +48,8 @@ class InvoiceItem extends \Google\Protobuf\Internal\Message
      *     @type \Common\V1\Money $line_total
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Programmatic\Types\Types::initOnce();
         parent::__construct($data);
     }

@@ -33,7 +33,8 @@ class ListPaymentLinksResponse extends \Google\Protobuf\Internal\Message
      *     @type \Common\V1\PaginatedResponseMeta $meta
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Programmatic\PaymentLinks\PaymentLinks::initOnce();
         parent::__construct($data);
     }

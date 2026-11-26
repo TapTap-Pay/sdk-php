@@ -28,7 +28,8 @@ class CreateRefundResponse extends \Google\Protobuf\Internal\Message
      *     @type \Programmatic\Types\V1\Transaction $refund
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Programmatic\Refunds\Refunds::initOnce();
         parent::__construct($data);
     }

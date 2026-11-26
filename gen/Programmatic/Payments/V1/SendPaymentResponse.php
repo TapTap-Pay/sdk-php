@@ -28,7 +28,8 @@ class SendPaymentResponse extends \Google\Protobuf\Internal\Message
      *     @type \Programmatic\Types\V1\Payment $payment
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Programmatic\Payments\Payments::initOnce();
         parent::__construct($data);
     }

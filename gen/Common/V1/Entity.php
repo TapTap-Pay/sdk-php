@@ -33,7 +33,8 @@ class Entity extends \Google\Protobuf\Internal\Message
      *     @type string $entity_id
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Common\Users::initOnce();
         parent::__construct($data);
     }

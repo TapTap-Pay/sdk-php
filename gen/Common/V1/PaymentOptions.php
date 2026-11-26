@@ -101,7 +101,8 @@ class PaymentOptions extends \Google\Protobuf\Internal\Message
      *           integration_callback.go). Best-effort, never blocks the workflow.
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Common\Finance::initOnce();
         parent::__construct($data);
     }

@@ -38,7 +38,8 @@ class PaymentContributor extends \Google\Protobuf\Internal\Message
      *     @type string $id
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Common\Finance::initOnce();
         parent::__construct($data);
     }

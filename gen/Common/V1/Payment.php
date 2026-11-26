@@ -164,7 +164,8 @@ class Payment extends \Google\Protobuf\Internal\Message
      *           fallback CTA when no return URL is configured.
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Common\Finance::initOnce();
         parent::__construct($data);
     }

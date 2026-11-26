@@ -28,7 +28,8 @@ class GetRefundRequest extends \Google\Protobuf\Internal\Message
      *     @type string $refund_id
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Programmatic\Refunds\Refunds::initOnce();
         parent::__construct($data);
     }

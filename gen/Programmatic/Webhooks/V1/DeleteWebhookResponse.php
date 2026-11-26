@@ -28,7 +28,8 @@ class DeleteWebhookResponse extends \Google\Protobuf\Internal\Message
      *     @type bool $deleted
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Programmatic\Webhooks\Webhooks::initOnce();
         parent::__construct($data);
     }

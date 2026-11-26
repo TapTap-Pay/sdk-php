@@ -43,7 +43,8 @@ class InvoiceRecipientInput extends \Google\Protobuf\Internal\Message
      *     @type string $address
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Programmatic\Invoices\Invoices::initOnce();
         parent::__construct($data);
     }

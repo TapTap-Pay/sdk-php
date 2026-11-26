@@ -33,7 +33,8 @@ class ListWalletsRequest extends \Google\Protobuf\Internal\Message
      *     @type string $currency
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Programmatic\Wallets\Wallets::initOnce();
         parent::__construct($data);
     }

@@ -156,7 +156,8 @@ class Transaction extends \Google\Protobuf\Internal\Message
      *           Custom data the integrator attached. Round-trips verbatim.
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Programmatic\Types\Types::initOnce();
         parent::__construct($data);
     }

@@ -36,7 +36,8 @@ class CreatePayInResponse extends \Google\Protobuf\Internal\Message
      *           Set when the payin method requires a hosted redirect (e.g. card 3DS).
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Programmatic\Payins\Payins::initOnce();
         parent::__construct($data);
     }

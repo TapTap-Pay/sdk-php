@@ -43,7 +43,8 @@ class ListInvoicesRequest extends \Google\Protobuf\Internal\Message
      *     @type \Google\Protobuf\Timestamp $issued_to
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Programmatic\Invoices\Invoices::initOnce();
         parent::__construct($data);
     }

@@ -28,7 +28,8 @@ class GetPayInResponse extends \Google\Protobuf\Internal\Message
      *     @type \Programmatic\Types\V1\Transaction $payin
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Programmatic\Payins\Payins::initOnce();
         parent::__construct($data);
     }

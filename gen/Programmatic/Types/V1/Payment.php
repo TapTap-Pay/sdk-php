@@ -106,7 +106,8 @@ class Payment extends \Google\Protobuf\Internal\Message
      *           (based on MODE) so SDK clients never hardcode the host or path.
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Programmatic\Types\Types::initOnce();
         parent::__construct($data);
     }

@@ -28,7 +28,8 @@ class GetTransactionRequest extends \Google\Protobuf\Internal\Message
      *     @type string $transaction_id
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Programmatic\Transactions\Transactions::initOnce();
         parent::__construct($data);
     }

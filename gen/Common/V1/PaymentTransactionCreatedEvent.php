@@ -55,7 +55,8 @@ class PaymentTransactionCreatedEvent extends \Google\Protobuf\Internal\Message
      *     @type \Google\Protobuf\Timestamp $occurred_at
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Common\Events::initOnce();
         parent::__construct($data);
     }

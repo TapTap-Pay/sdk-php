@@ -67,7 +67,8 @@ class CreatePayInRequest extends \Google\Protobuf\Internal\Message
      *           Free-form key/value pairs that round-trip on the resulting transaction.
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Programmatic\Payins\Payins::initOnce();
         parent::__construct($data);
     }

@@ -61,7 +61,8 @@ class WebhookSubscription extends \Google\Protobuf\Internal\Message
      *     @type \Google\Protobuf\Timestamp $updated_at
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Programmatic\Types\Types::initOnce();
         parent::__construct($data);
     }

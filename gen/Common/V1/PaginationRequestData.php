@@ -33,7 +33,8 @@ class PaginationRequestData extends \Google\Protobuf\Internal\Message
      *     @type int $page_size
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Common\Response::initOnce();
         parent::__construct($data);
     }

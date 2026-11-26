@@ -68,7 +68,8 @@ class CreateInvoiceRequest extends \Google\Protobuf\Internal\Message
      *     @type string $idempotency_key
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Programmatic\Invoices\Invoices::initOnce();
         parent::__construct($data);
     }

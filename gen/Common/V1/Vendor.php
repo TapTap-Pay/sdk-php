@@ -145,7 +145,8 @@ class Vendor extends \Google\Protobuf\Internal\Message
      *           to render "cert uploaded ✓" without ever fetching the ciphertext.
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Common\Vendors::initOnce();
         parent::__construct($data);
     }

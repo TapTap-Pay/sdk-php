@@ -61,7 +61,8 @@ class PaymentMethod extends \Google\Protobuf\Internal\Message
      *           Set when method = WALLET (the source wallet id, vendor-scoped).
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Programmatic\Types\Types::initOnce();
         parent::__construct($data);
     }

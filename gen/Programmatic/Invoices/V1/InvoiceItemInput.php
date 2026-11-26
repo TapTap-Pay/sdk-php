@@ -38,7 +38,8 @@ class InvoiceItemInput extends \Google\Protobuf\Internal\Message
      *     @type \Common\V1\Money $unit_price
      * }
      */
-    public function __construct($data = NULL) {
+    public function __construct($data = null)
+    {
         \GPBMetadata\V1\Programmatic\Invoices\Invoices::initOnce();
         parent::__construct($data);
     }
