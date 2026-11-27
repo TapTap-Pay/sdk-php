@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace TapTap\Pay;
 
-use Programmatic\Invoices\V1\InvoicesServiceClient;
-use Programmatic\Payins\V1\PayInsServiceClient;
-use Programmatic\Payment_links\V1\PaymentLinksServiceClient;
-use Programmatic\Payments\V1\PaymentsServiceClient;
-use Programmatic\Payouts\V1\PayOutsServiceClient;
-use Programmatic\Refunds\V1\RefundsServiceClient;
-use Programmatic\Transactions\V1\TransactionsServiceClient;
-use Programmatic\Transfers\V1\TransfersServiceClient;
-use Programmatic\Wallets\V1\WalletsServiceClient;
-use Programmatic\Webhooks\V1\WebhooksServiceClient;
+use Taptap\Banking\Programmatic\V1\BankingServiceClient;
+use Taptap\Developer\Programmatic\V1\WebhookServiceClient;
+use Taptap\Invoicing\Programmatic\V1\InboundDocumentServiceClient;
+use Taptap\Invoicing\Programmatic\V1\InvoiceServiceClient;
+use Taptap\Marketplace\Programmatic\V1\SubvendorServiceClient;
+use Taptap\Payment\Programmatic\V1\CustomerServiceClient;
+use Taptap\Payment\Programmatic\V1\PaymentLinkServiceClient;
+use Taptap\Payment\Programmatic\V1\PaymentServiceClient;
+use Taptap\Payment\Programmatic\V1\RefundServiceClient;
+use Taptap\Payment\Programmatic\V1\TransactionServiceClient;
+use Taptap\Payment\Programmatic\V1\WalletServiceClient;
 use TapTap\Pay\Connect\Transport;
 
 /**
@@ -23,41 +24,48 @@ use TapTap\Pay\Connect\Transport;
  * call concurrently across coroutines/fibers since the shared
  * {@see Transport} keeps state only inside per-call curl invocations.
  *
+ * Every request names the vendor the API key belongs to in its
+ * vendor_id field (`ven_` followed by a UUID). The SDK does not fill
+ * it in.
+ *
  * @example
- *   $client = new Client(new Options(apiKey: getenv("TAPTAP_SECRET")));
+ *   $client = new Client(new Options(apiKey: getenv("TAPTAP_API_KEY")));
  *   $resp = $client->paymentLinks->createPaymentLink(
  *       (new CreatePaymentLinkRequest())
+ *           ->setVendorId(getenv("TAPTAP_VENDOR_ID"))
  *           ->setTitle("Premium plan")
- *           ->setAmount((new Money())->setAmountMinor(2999)->setCurrency("EUR"))
- *           ->setTargetWalletId(getenv("TAPTAP_WALLET_ID")),
+ *           ->setAmount((new Money())->setCurrency("EUR")->setAmountMinor(2999))
+ *           ->setUsage((new PaymentLinkUsage())->setUnlimited(true)),
  *   );
- *   echo $resp->getLink()->getId();
+ *   echo $resp->getPaymentLink()?->getId();
  */
 final class Client
 {
-    public readonly InvoicesServiceClient $invoices;
-    public readonly PayInsServiceClient $payIns;
-    public readonly PaymentLinksServiceClient $paymentLinks;
-    public readonly PaymentsServiceClient $payments;
-    public readonly PayOutsServiceClient $payOuts;
-    public readonly RefundsServiceClient $refunds;
-    public readonly TransactionsServiceClient $transactions;
-    public readonly TransfersServiceClient $transfers;
-    public readonly WalletsServiceClient $wallets;
-    public readonly WebhooksServiceClient $webhooks;
+    public readonly BankingServiceClient $banking;
+    public readonly CustomerServiceClient $customers;
+    public readonly InboundDocumentServiceClient $inboundDocuments;
+    public readonly InvoiceServiceClient $invoices;
+    public readonly PaymentLinkServiceClient $paymentLinks;
+    public readonly PaymentServiceClient $payments;
+    public readonly RefundServiceClient $refunds;
+    public readonly SubvendorServiceClient $subvendors;
+    public readonly TransactionServiceClient $transactions;
+    public readonly WalletServiceClient $wallets;
+    public readonly WebhookServiceClient $webhooks;
 
     public function __construct(Options $options)
     {
         $transport = new Transport($options);
-        $this->invoices = new InvoicesServiceClient($transport);
-        $this->payIns = new PayInsServiceClient($transport);
-        $this->paymentLinks = new PaymentLinksServiceClient($transport);
-        $this->payments = new PaymentsServiceClient($transport);
-        $this->payOuts = new PayOutsServiceClient($transport);
-        $this->refunds = new RefundsServiceClient($transport);
-        $this->transactions = new TransactionsServiceClient($transport);
-        $this->transfers = new TransfersServiceClient($transport);
-        $this->wallets = new WalletsServiceClient($transport);
-        $this->webhooks = new WebhooksServiceClient($transport);
+        $this->banking = new BankingServiceClient($transport);
+        $this->customers = new CustomerServiceClient($transport);
+        $this->inboundDocuments = new InboundDocumentServiceClient($transport);
+        $this->invoices = new InvoiceServiceClient($transport);
+        $this->paymentLinks = new PaymentLinkServiceClient($transport);
+        $this->payments = new PaymentServiceClient($transport);
+        $this->refunds = new RefundServiceClient($transport);
+        $this->subvendors = new SubvendorServiceClient($transport);
+        $this->transactions = new TransactionServiceClient($transport);
+        $this->wallets = new WalletServiceClient($transport);
+        $this->webhooks = new WebhookServiceClient($transport);
     }
 }

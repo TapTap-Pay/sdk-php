@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TapTap\Pay;
 
+use Taptap\Common\V1\ErrorInfo;
 use TapTap\Pay\Connect\Code;
 use TapTap\Pay\Connect\Error;
 
@@ -14,6 +15,8 @@ use TapTap\Pay\Connect\Error;
  */
 final class Errors
 {
+    private const ERROR_INFO_TYPE = "taptap.common.v1.ErrorInfo";
+
     private function __construct()
     {
     }
@@ -24,8 +27,8 @@ final class Errors
     }
 
     /**
-     * AlreadyExists — typically returned when an idempotency_key
-     * collides with a prior request whose payload differed.
+     * AlreadyExists — the resource being created is already there
+     * (e.g. a second webhook subscription for the same URL).
      */
     public static function isAlreadyExists(\Throwable $err): bool
     {
@@ -66,6 +69,49 @@ final class Errors
     public static function isFailedPrecondition(\Throwable $err): bool
     {
         return self::codeOf($err) === Code::FAILED_PRECONDITION;
+    }
+
+    /**
+     * Aborted — returned with code IDEMPOTENCY_KEY_CONFLICT when an
+     * idempotency key is reused for a request whose content differs.
+     */
+    public static function isAborted(\Throwable $err): bool
+    {
+        return self::codeOf($err) === Code::ABORTED;
+    }
+
+    /**
+     * Returns the taptap.common.v1.ErrorInfo detail the API attaches
+     * to every refusal: a stable machine code (getCode(), e.g.
+     * PAYMENT_LINK_NOT_FOUND), the parameters around it (getParams())
+     * and an English debug message (getMessage()). Branch on the code,
+     * never on the message. Null when $err is not a Connect error or
+     * carries no such detail (e.g. a transport failure).
+     */
+    public static function errorInfo(\Throwable $err): ?ErrorInfo
+    {
+        if (!$err instanceof Error) {
+            return null;
+        }
+        foreach ($err->details as $detail) {
+            if ($detail["type"] !== self::ERROR_INFO_TYPE) {
+                continue;
+            }
+            $info = new ErrorInfo();
+            try {
+                $info->mergeFromString($detail["value"]);
+            } catch (\Exception) {
+                continue;
+            }
+            return $info;
+        }
+        return null;
+    }
+
+    /** The stable machine code of a refusal, or null without one. */
+    public static function errorCode(\Throwable $err): ?string
+    {
+        return self::errorInfo($err)?->getCode();
     }
 
     private static function codeOf(\Throwable $err): ?string

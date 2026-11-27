@@ -130,24 +130,7 @@ final class Transport
             return $respBody;
         }
 
-        // Connect-protocol error responses carry a JSON body with
-        // {"code": "...", "message": "..."} regardless of the request
-        // content-type. Fall back to HTTP-status mapping if the body
-        // is missing or malformed.
-        $code = Code::fromHttpStatus($status);
-        $message = "HTTP " . $status;
-        if ($respBody !== "") {
-            $decoded = json_decode($respBody, true);
-            if (is_array($decoded)) {
-                if (isset($decoded["code"]) && is_string($decoded["code"])) {
-                    $code = $decoded["code"];
-                }
-                if (isset($decoded["message"]) && is_string($decoded["message"])) {
-                    $message = $decoded["message"];
-                }
-            }
-        }
-        throw new Error($code, $message);
+        throw Error::fromHttpResponse($status, $respBody);
     }
 
     /**
