@@ -7,48 +7,61 @@ declare(strict_types=1);
 //
 // Run with:
 //
-//   TAPTAP_SECRET=sk_test_... TAPTAP_WALLET_ID=<uuid> \
+//   TAPTAP_API_KEY=taptap_live_... TAPTAP_VENDOR_ID=ven_<uuid> \
 //       php examples/quickstart/quickstart.php
 
 require __DIR__ . "/../../vendor/autoload.php";
 
-use Common\V1\Money;
-use Common\V1\PaginationRequestData;
-use Programmatic\Payment_links\V1\CreatePaymentLinkRequest;
-use Programmatic\Payment_links\V1\GetPaymentLinkRequest;
-use Programmatic\Payment_links\V1\ListPaymentLinksRequest;
+use Taptap\Common\V1\Money;
+use Taptap\Payment\Programmatic\V1\CreatePaymentLinkRequest;
+use Taptap\Payment\Programmatic\V1\GetPaymentLinkRequest;
+use Taptap\Payment\Programmatic\V1\ListPaymentLinksRequest;
+use Taptap\Payment\Programmatic\V1\PaymentLinkUsage;
 use TapTap\Pay\Client;
+use TapTap\Pay\Connect\Error;
+use TapTap\Pay\Errors;
+use TapTap\Pay\Idempotency;
 use TapTap\Pay\Options;
 use TapTap\Pay\Pagination;
 
-$secret = getenv("TAPTAP_SECRET");
-$wallet = getenv("TAPTAP_WALLET_ID");
-if (!$secret || !$wallet) {
-    fwrite(STDERR, "set TAPTAP_SECRET and TAPTAP_WALLET_ID\n");
+$apiKey = getenv("TAPTAP_API_KEY");
+$vendorId = getenv("TAPTAP_VENDOR_ID");
+if (!$apiKey || !$vendorId) {
+    fwrite(STDERR, "set TAPTAP_API_KEY and TAPTAP_VENDOR_ID\n");
     exit(1);
 }
 
-$client = new Client(new Options(apiKey: $secret));
+$client = new Client(new Options(apiKey: $apiKey));
 
-$created = $client->paymentLinks->createPaymentLink(
-    (new CreatePaymentLinkRequest())
-        ->setTitle("Premium plan")
-        ->setAmount((new Money())->setAmountMinor(2999)->setCurrency("EUR"))
-        ->setTargetWalletId($wallet),
-);
-echo "created: ", $created->getLink()->getId(), PHP_EOL;
+try {
+    $created = $client->paymentLinks->createPaymentLink(
+        (new CreatePaymentLinkRequest())
+            ->setVendorId($vendorId)
+            ->setTitle("Premium plan")
+            ->setAmount((new Money())->setCurrency("EUR")->setAmountMinor(2999))
+            ->setUsage((new PaymentLinkUsage())->setUnlimited(true))
+            ->setIdempotencyKey(Idempotency::newKey()),
+    );
+} catch (Error $e) {
+    fwrite(STDERR, "refused: " . $e->getConnectCode() . " " . (Errors::errorCode($e) ?? "") . "\n");
+    exit(1);
+}
+$linkId = (string) $created->getPaymentLink()?->getId();
+echo "created: ", $linkId, PHP_EOL;
 
 $fetched = $client->paymentLinks->getPaymentLink(
-    (new GetPaymentLinkRequest())->setId($created->getLink()->getId()),
+    (new GetPaymentLinkRequest())->setVendorId($vendorId)->setPaymentLinkId($linkId),
 );
-echo "fetched: ", $fetched->getLink()->getTitle(), PHP_EOL;
+echo "fetched: ", $fetched->getPaymentLink()?->getTitle(), PHP_EOL;
 
-$fetch = function (int $page) use ($client) {
+$fetch = function (string $pageToken) use ($client, $vendorId) {
     $resp = $client->paymentLinks->listPaymentLinks(
         (new ListPaymentLinksRequest())
-            ->setPagination((new PaginationRequestData())->setPage($page)->setPageSize(100)),
+            ->setVendorId($vendorId)
+            ->setPageSize(100)
+            ->setPageToken($pageToken),
     );
-    return [iterator_to_array($resp->getLinks()), $resp->getMeta()];
+    return [iterator_to_array($resp->getPaymentLinks()), $resp->getNextPageToken()];
 };
 
 $count = 0;
